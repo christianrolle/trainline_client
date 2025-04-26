@@ -21,3 +21,5 @@ ENV GEM_HOME=/app/vendor/bundle/ruby/3.4.3
 WORKDIR /usr/src/app
 RUN bundle install
 COPY . /usr/src/app/
+
+CMD [ "tail", "-f", "/dev/stdout" ]

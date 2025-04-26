@@ -3,11 +3,10 @@ services:
   api_client:
     build: .
     volumes:
-      - .:/app
+      - .:/usr/src/app
       - ./vendor/bundle:/app/vendor/bundle
     env_file:
       - .env
-    command: bash
     environment:
       BUNDLE_PATH: /app/vendor/bundle
       GEM_HOME: /app/vendor/bundle/ruby/3.4.3

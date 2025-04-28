@@ -22,7 +22,7 @@ class JourneySearch
                                          destination: destination,
                                          journeyDate: {
                                            type: 'departAfter',
-                                           time: depart_after.iso8601
+                                           time: depart_after.utc.iso8601
                                          }}]
     Trainline::Connection.request('journey-search',
                                   method: :post,

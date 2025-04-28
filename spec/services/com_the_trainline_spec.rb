@@ -32,7 +32,7 @@ def stub_journey_request(origin, destination, depart_after)
                                          origin: origin,
                                          destination: destination,
                                          journeyDate: { type: 'departAfter',
-                                                        time: depart_after.iso8601 }}]
+                                                        time: depart_after.utc.iso8601 }}]
                 }.to_json)
 end
 

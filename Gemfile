@@ -6,6 +6,7 @@ ruby '3.4.3'
 gem 'rails', '~> 7.1.5', '>= 7.1.5.1'
 gem 'faraday'
 gem 'dotenv-rails'
+gem 'ostruct'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[windows jruby]
 

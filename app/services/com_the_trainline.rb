@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class ComTheTrainline
-  def self.find(from, to, departure_at)
-    departure_code = LocationAdapter.find(from).code
-    return [] if departure_code.nil?
+  def self.find(from, to, departure_at = Time.current)
+    origin = LocationAdapter.find(from).code
+    return [] if origin.nil?
 
-    arrival_code = LocationAdapter.find(to).code
-    return [] if arrival_code.nil?
-    departure_code
+    destination = LocationAdapter.find(to).code
+    return [] if destination.nil?
+
+    JourneyAdapter.transform JourneySearch.request(origin: origin,
+                                                   destination: destination,
+                                                   depart_after: departure_at)
   end
 end

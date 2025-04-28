@@ -4,8 +4,9 @@ module Trainline
   class Middleware
     DEFAULT_HEADERS = {
       'Accept' => 'application/json',
-      'Content-Type' => 'application/json',
-      'User-Agent' => 'Friend',
+      'Content-Type' => 'text/plain;charset=UTF-8',
+      'User-Agent' => 'Mozilla/5.0',
+      'x-version' => '4.42.30718' # anti bot "logic"
     }.freeze
 
     def initialize(app)
@@ -18,13 +19,8 @@ module Trainline
       response = @app.call(env).on_complete do |request|
         log(request) unless request.success?
       end
-      JSON.parse response.body
-    rescue Faraday::TimeoutError
-      log('Timeout')
     rescue Faraday::Error => e
       log(e)
-    rescue JSON::ParserError => e
-      log("Parsing #{e.message} failed")
     end
 
     private

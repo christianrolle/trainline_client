@@ -9,11 +9,16 @@ module Trainline
   class Connection
     HOST = ENV.fetch('TRAINLINE_API_HOST', 'www.thetrainline.com')
 
-    def self.request(resource, method: :get, params: {})
+    def self.request(resource, method: :get, params: {}, body: nil, parser: JSON, headers: {})
       path = "/api/#{resource}"
-      connection.run_request(method, path, nil, nil) do |req|
+      body = body.to_json if body.present?
+
+      response = connection.run_request(method, path, body, headers) do |req|
         req.params.update(params)
       end
+      parser.parse response.body
+    rescue JSON::ParserError => e
+      log("Parsing #{e.message} failed")
     end
 
     def self.connection
